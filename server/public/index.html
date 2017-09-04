@@ -1,37 +1,69 @@
 <!doctype html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Timestamp Microservice</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Timestamp Microservice</h1>
-    <div class="btn-o">
-        <a id="follow-button" class="btn" title="Follow @koojam_pk on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ffollow-button&amp;ref_src=twsrc%5Etfw&amp;region=follow_link&amp;screen_name=koojam_pk&amp;tw_p=followbutton">
-            <i></i>
-            <span class="label" id="l">Follow <b>@koojam_pk</b></span>
-        </a>
-    </div>
-    <br />
-    <section class="story">
-        <h3>User Stories:</h3>
-        <ol>
-            <li>I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016).</li>
-            <li>If it does, it returns both the Unix timestamp and the natural language form of that date.</li>
-            <li>If it does not contain a date or Unix timestamp, it returns null for those properties.</li>
-        </ol>
-    </section>
-    <h3>Example Usage</h3>
-    <small class="example">${fullUrl}/api/1513267200</small><br />
-    <small class="example">${fullUrl}/api/December 14, 2017</small><br />
-    <small class="example">${fullUrl}/api/Dec 14, 2017</small><br />
+    <div class="container">
+        <h1 class="title">Timestamp Microservice</h1>
+        <div class="social-network-wrapper">
+            <div class="btn-o">
+                <a id="follow-button" class="btn btn-primary btn-sm" title="Follow @koojam_pk on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ffollow-button&amp;ref_src=twsrc%5Etfw&amp;region=follow_link&amp;screen_name=koojam_pk&amp;tw_p=followbutton">
+                    <i class="twitter-follow-icon"></i>
+                    <span class="label" id="l">Follow <b>@koojam_pk</b></span>
+                </a>
+            </div>
+            <div class="btn-o">
+                <a id="github-button" class="btn btn-primary btn-sm" title="Source code on Github" 
+                    href="https://github.com/koojam-pk/api-timestamp-microservice"
+                    target="blank">
+                    <i class="github-source-icon"></i>
+                    <span class="label">Source code on Github</span>
+                </a>
+                <br />
+            </div>
+        </div>
+        <section class="story">
+            <h3>User Stories:</h3>
+            <ol>
+                <li>I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016).</li>
+                <li>If it does, it returns both the Unix timestamp and the natural language form of that date.</li>
+                <li>If it does not contain a date or Unix timestamp, it returns null for those properties.</li>
+            </ol>
+        </section>
+        <h3>Example Usage</h3>
+        <small class="example">${fullUrl}/api/1513267200</small><br />
+        <small class="example">${fullUrl}/api/December 14, 2017</small><br />
+        <small class="example">${fullUrl}/api/Dec 14, 2017</small><br />
 
-    <h3>Example Output</h3>
-    <small class="example">
-    {
-        "unix": 1513267200,  
-        "natural": "December 14, 2017"
-    }
-    </small>
+        <h3>Example Output</h3>
+        <small class="example">
+        {
+            "unix": 1513267200,  
+            "natural": "December 14, 2017"
+        }
+        </small>
+        <hr />
+        <form>
+            <div class="row">
+                <div class="col col-12 col-md-3">
+                    <label for="timestamp">Enter natural or unix timestamp:</label>
+                </div>
+                <div class="col col-12 col-md-3">
+                    <input type="text" id="timestamp" class="form-control mh-100" required />
+                </div>
+                <button type="button" class="btn btn-success btn-sm btn-align" onclick="getTimestamp()">Convert</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function getTimestamp() {
+            var value = document.querySelector('#timestamp').value;
+            window.location.href = '${fullUrl}/api/'+value;
+        }
+    </script>
 </body>
 </html>
